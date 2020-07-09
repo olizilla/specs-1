@@ -1,0 +1,26 @@
+{{- if not (.Page.Scratch.Get "katex") -}}
+<!-- Include katext only first time -->
+<link rel="stylesheet" href="{{ "katex/katex.min.css" | relURL }}" />
+<script defer src="{{ "katex/katex.min.js" | relURL }}"></script>
+<script defer src="{{ "katex/auto-render.min.js" | relURL }}" onload='renderMathInElement(document.body, {
+  throwOnError: false,
+  <!-- parse <code> and <pre> which are excluded by default -->
+  ignoredTags: ["script", "noscript", "style", "textarea"],
+  delimiters: [
+   {left: "$$", right: "$$", display: true},
+   {left: "$", right: "$", display: false},
+  ]
+});'></script>
+<style>
+.katex-display {
+  margin: 0;
+}
+.katex-display > .katex {
+  text-align: left;
+}
+</style>
+{{- .Page.Scratch.Set "katex" true -}}
+{{- end -}}
+
+<!-- Use the raw input, without any transformations -->
+{{ .Inner }}
