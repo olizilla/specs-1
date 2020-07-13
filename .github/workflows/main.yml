@@ -53,6 +53,15 @@ jobs:
           sudo chown -R root:root /home/runner/work/specs
           sudo make build
 
+      - uses: ipfs-shipyard/ipfs-github-action@master
+        with:
+          path_to_add: /home/runner/work/specs/specs
+          cluster_host: /dnsaddr/cluster.ipfs.io
+          cluster_user: ${{ secrets.CLUSTER_USER }}
+          cluster_password: ${{ secrets.CLUSTER_PASSWORD }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Deploy using SSH
         env:
           DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
