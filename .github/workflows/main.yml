@@ -13,10 +13,6 @@ jobs:
         with:
           submodules: true
 
-      - uses: webfactory/ssh-agent@v0.2.0
-        with:
-          ssh-private-key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-
       - name: Install Go
         run: |
           sudo apt-get remove golang-go
@@ -61,6 +57,10 @@ jobs:
           cluster_password: ${{ secrets.CLUSTER_PASSWORD }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: webfactory/ssh-agent@v0.2.0
+        with:
+          ssh-private-key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
 
       - name: Deploy using SSH
         env:
