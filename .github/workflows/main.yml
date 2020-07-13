@@ -51,7 +51,7 @@ jobs:
           sudo make build
           ls -la $GITHUB_WORKSPACE/build/website
 
-      - uses: ipfs-shipyard/ipfs-github-action@master
+      - uses: ipfs-shipyard/ipfs-github-action@debug
         with:
           path_to_add: build/website
           cluster_host: /dnsaddr/cluster.ipfs.io
