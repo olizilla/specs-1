@@ -53,7 +53,7 @@ jobs:
 
       - uses: ipfs-shipyard/ipfs-github-action@debug
         with:
-          path_to_add: build/website
+          path_to_add: /github/workspace/build/website
           cluster_host: /dnsaddr/cluster.ipfs.io
           cluster_user: ${{ secrets.CLUSTER_USER }}
           cluster_password: ${{ secrets.CLUSTER_PASSWORD }}
