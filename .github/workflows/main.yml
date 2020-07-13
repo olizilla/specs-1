@@ -46,12 +46,12 @@ jobs:
 
       - name: Build
         run: |
-          sudo chown -R root:root /home/runner/work/specs
+          sudo chown -R root:root $GITHUB_WORKSPACE
           sudo make build
 
       - uses: ipfs-shipyard/ipfs-github-action@master
         with:
-          path_to_add: /home/runner/work/specs/specs
+          path_to_add: "$GITHUB_WORKSPACE/build/website"
           cluster_host: /dnsaddr/cluster.ipfs.io
           cluster_user: ${{ secrets.CLUSTER_USER }}
           cluster_password: ${{ secrets.CLUSTER_PASSWORD }}
@@ -67,7 +67,7 @@ jobs:
           DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          sudo chown -R runner /home/runner/work/specs/specs
+          sudo chown -R runner $GITHUB_WORKSPACE
           sudo chown -R runner .git/
           eval "$(ssh-agent -s)"
           ssh-add - <<< "${DEPLOY_KEY}"
