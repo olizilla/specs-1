@@ -39,6 +39,7 @@ jobs:
           go env
           which go
           go version
+          echo $GITHUB_WORKSPACE
 
       - name: Install deps-ga
         run: |
@@ -51,7 +52,7 @@ jobs:
 
       - uses: ipfs-shipyard/ipfs-github-action@master
         with:
-          path_to_add: "$GITHUB_WORKSPACE/build/website"
+          path_to_add: $GITHUB_WORKSPACE/build/website
           cluster_host: /dnsaddr/cluster.ipfs.io
           cluster_user: ${{ secrets.CLUSTER_USER }}
           cluster_password: ${{ secrets.CLUSTER_PASSWORD }}
